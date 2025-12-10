@@ -28,7 +28,7 @@
             align-items: center;
             gap: 20px;
             flex-wrap: wrap;
-            z-index: 10; /* Asegurar que esté por encima del iframe */
+            z-index: 10;
         }
         h1 {
             margin: 0;
@@ -66,13 +66,13 @@
         main {
             flex-grow: 1;
             padding: 0;
-            overflow: hidden; /* Evita barras de desplazamiento innecesarias en el contenedor */
+            overflow: hidden;
         }
         #simulador-frame {
             width: 100%;
             height: 100%;
             border: none;
-            display: none; /* Ocultar inicialmente */
+            display: none;
         }
         .placeholder {
             display: flex;
@@ -108,32 +108,33 @@
         <main>
             <div id="placeholder" class="placeholder">
                 Usa el selector para cargar uno de los simuladores.
-                <br><small style="font-size: 0.8em; color: #999; margin-top: 10px;">Asegúrate de haber subido todas las carpetas a GitHub.</small>
             </div>
             <iframe id="simulador-frame" title="Contenido del Simulador"></iframe>
         </main>
     </div>
 
     <script>
-        // Lista de simuladores con su nombre y la ruta relativa al archivo index.html
+        // 🚨🚨🚨 INSTRUCCIÓN CLAVE: REEMPLAZA LOS LINKS DE EJEMPLO ABAJO 🚨🚨🚨
+        // Define el nombre y la URL ABSOLUTA de cada simulador en GitHub Pages
         const simuladores = [
-            { name: "01. Mapa Interactivo de Proyectos", path: "mapainteractivo01-main/index.html" },
-            { name: "02. Calculadora de Consumo (Hogar)", path: "casaconsumo-main/index.html" },
-            { name: "03. Simulador Eólico (Producción)", path: "eolica01-main/index.html" },
-            { name: "04. Simulador Fotovoltaico (Panel)", path: "fotovol-main/index.html" },
-            { name: "05. Demostración Hidroeléctrica", path: "hidro-main/index.html" },
-            { name: "06. Simulador Nuclear por Fisión", path: "NU1-main/index.html" },
-            { name: "07. Simulador de Mezcla de Biocombustibles (B%)", path: "biodisel-main/index.html" },
-            { name: "08. Autoevaluación de Energías Alternativas", path: "autoeva-main/index.html" },
+            // Reemplaza 'https://tucorreo.github.io/simuladores-energia/' con la URL base de tu proyecto.
+            { name: "01. Mapa Interactivo de Proyectos", path: "https://lorenarodriguez171293.github.io/casaconsumo/" },
+            { name: "02. Calculadora de Consumo (Hogar)", path: "https://lorenarodriguez171293.github.io/casaconsumo/" },
+            { name: "03. Simulador Eólico (Producción)", path: "https://lorenarodriguez171293.github.io/eolica01/" },
+            { name: "04. Simulador Fotovoltaico (Panel)", path: "https://tucorreo.github.io/simuladores-energia/fotovol-main/index.html" },
+            { name: "05. Demostración Hidroeléctrica", path: "https://tucorreo.github.io/simuladores-energia/hidro-main/index.html" },
+            { name: "06. Simulador Nuclear por Fisión", path: "https://tucorreo.github.io/simuladores-energia/NU1-main/index.html" },
+            { name: "07. Simulador de Mezcla de Biocombustibles (B%)", path: "https://tucorreo.github.io/simuladores-energia/biodisel-main/index.html" },
+            { name: "08. Autoevaluación de Energías Alternativas", path: "https://tucorreo.github.io/simuladores-energia/autoeva-main/index.html" },
         ];
+        
+        // --- El resto del script permanece igual y maneja la carga en el iframe ---
 
         const select = document.getElementById('simulador-select');
         const frame = document.getElementById('simulador-frame');
         const placeholder = document.getElementById('placeholder');
 
-        // Función para llenar el menú desplegable (select)
         function llenarSelector() {
-            // Opción por defecto
             let defaultOption = document.createElement('option');
             defaultOption.value = "";
             defaultOption.textContent = "-- Selecciona uno para cargar --";
@@ -141,7 +142,6 @@
             defaultOption.selected = true;
             select.appendChild(defaultOption);
 
-            // Agregar las opciones de los simuladores
             simuladores.forEach(sim => {
                 let option = document.createElement('option');
                 option.value = sim.path;
@@ -150,13 +150,10 @@
             });
         }
 
-        // Función para cargar el simulador en el iframe
         function cargarSimulador() {
             const selectedPath = select.value;
             if (selectedPath) {
-                // Establece la URL del simulador
                 frame.src = selectedPath;
-                // Muestra el iframe y oculta el mensaje de bienvenida
                 frame.style.display = 'block';
                 placeholder.style.display = 'none';
             } else {
@@ -164,7 +161,6 @@
             }
         }
 
-        // Inicializar el selector al cargar la página
         document.addEventListener('DOMContentLoaded', llenarSelector);
     </script>
 </body>
