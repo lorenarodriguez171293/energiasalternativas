@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción - Matriz Energética Argentina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 25px;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+        }
+        .intro-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #3498db;
+            margin-top: 20px;
+        }
+        .energia-card {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 5px solid #4CAF50;
+            border-radius: 5px;
+        }
+        .energia-card p {
+            margin-bottom: 5px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="intro-container">
+
+    <h2>👋 Bienvenido al Dashboard de Simuladores de Energía</h2>
+
+    <p>Este espacio fue diseñado para comprender y experimentar con las principales fuentes de energía, con un enfoque particular en las **energías alternativas (o renovables)** y su rol en la matriz energética de Argentina.</p>
+
+    <h2 id="matriz">Matriz Energética Argentina 🇦🇷</h2>
+    <p>La matriz energética primaria de Argentina está dominada históricamente por el consumo de **combustibles fósiles**, aunque la participación de las fuentes renovables (eólica, solar, biomasa) ha crecido significativamente en la última década, impulsada por políticas de diversificación y sostenibilidad.</p>
+    
+    <p>Los principales componentes de la matriz incluyen:</p>
+    <ul>
+        <li>**Gas Natural:** Principal fuente, utilizada tanto para generación eléctrica como para consumo residencial/industrial.</li>
+        <li>**Petróleo:** Crucial para transporte y algunos procesos industriales.</li>
+        <li>**Hidroeléctrica y Nuclear:** Fuentes estables de generación de base.</li>
+        <li>**Eólica y Solar:** Las fuentes renovables de mayor crecimiento reciente.</li>
+    </ul>
+
+    <p style="text-align: center; margin: 30px 0;">
+        
+        <small style="display: block; color: #777;">Diagrama de torta que muestra la composición de la matriz energética primaria de Argentina.</small>
+    </p>
+
+    <p>El desafío actual es aumentar la cuota de las energías renovables para asegurar la sostenibilidad y reducir las emisiones de carbono, sin comprometer la seguridad y estabilidad del suministro.</p>
+
+    <h2 id="energias">Conceptos Clave de cada Energía</h2>
+
+    <div class="grid">
+        <div class="energia-card">
+            <h3>💨 Eólica</h3>
+            <p>Se obtiene al transformar la energía cinética del viento en electricidad mediante **aerogeneradores** (molinos modernos). Argentina tiene regiones con recursos eólicos de clase mundial (Patagonia).</p>
+            <p>🟢 **Ventaja:** Cero emisiones una vez instalada.</p>
+            <p>🔴 **Desafío:** Es intermitente; la producción depende de la velocidad del viento.</p>
+            <p style="text-align: center;"></p>
+        </div>
+
+        <div class="energia-card">
+            <h3>☀️ Fotovoltaica</h3>
+            <p>Convierte la radiación solar en electricidad utilizando el **efecto fotovoltaico** en paneles construidos con semiconductores (silicio). Es ideal para zonas con alta insolación.</p>
+            <p>🟢 **Ventaja:** Instalación modular y bajos costos de mantenimiento.</p>
+            <p>🔴 **Desafío:** Solo produce de día; requiere almacenamiento o soporte de otras fuentes.</p>
+            <p style="text-align: center;"></p>
+        </div>
+
+        <div class="energia-card">
+            <h3>💧 Hidroeléctrica</h3>
+            <p>Utiliza la fuerza del agua que cae desde una altura (embalse) para hacer girar una turbina y generar electricidad. Es una energía renovable de **generación gestionable** (puede activarse o desactivarse).</p>
+            <p>🟢 **Ventaja:** Alta capacidad y estabilidad de la red (base de carga).</p>
+            <p>🔴 **Desafío:** Gran impacto ambiental y social por la construcción de represas.</p>
+            <p style="text-align: center;"></p>
+        </div>
+
+        <div class="energia-card">
+            <h3>⚛️ Nuclear</h3>
+            <p>Se genera mediante la **fisión** de átomos pesados (Uranio) para producir vapor que mueve una turbina. No es renovable, pero se considera una fuente de baja emisión de carbono.</p>
+            <p>🟢 **Ventaja:** Generación continua (24/7) y densa (mucha energía en poco combustible).</p>
+            <p>🔴 **Desafío:** Gestión de residuos radiactivos de larga vida y altos costos iniciales.</p>
+            <p style="text-align: center;"></p>
+        </div>
+
+        <div class="energia-card">
+            <h3>🌾 Biocombustibles</h3>
+            <p>Combustibles líquidos o gaseosos derivados de biomasa (ej. cultivos como soja o caña de azúcar). En Argentina, el **Biodiésel (B%)** se mezcla con diésel fósil para transporte.</p>
+            <p>🟢 **Ventaja:** Contribuye al ciclo de carbono neutro (el cultivo absorbe CO2) y promueve la agroindustria.</p>
+            <p>🔴 **Desafío:** Puede competir con la producción de alimentos y requiere grandes extensiones de tierra.</p>
+            <p style="text-align: center;"></p>
+        </div>
+        
+        <div class="energia-card">
+            <h3>💡 Otras Aplicaciones</h3>
+            <p>El dashboard incluye simuladores para:</p>
+            <ul>
+                <li>**Consumo Hogar:** Para que usted calcule y entienda su propia demanda energética.</li>
+                <li>**Mapa Interactivo:** Para visualizar la ubicación y potencia de proyectos reales.</li>
+                <li>**Autoevaluación:** Para poner a prueba sus conocimientos sobre energías alternativas.</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
