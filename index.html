@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Simuladores de Energía</title>
+    <title>Dashboard de Simuladores de Energía (Iconos)</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
     <style>
-        /* ESTILOS GENERALES */
+        /* ESTILOS BASE */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -18,48 +21,56 @@
             height: 100%;
         }
 
-        /* HEADER Y SELECTOR */
+        /* HEADER Y SELECTOR DE ICONOS */
         header {
-            background-color: #0b5ed7;
+            background-color: #2c3e50; /* Azul oscuro */
             color: white;
-            padding: 15px 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            padding: 10px 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             z-index: 10;
         }
+
         h1 {
-            margin: 0;
+            margin: 0 0 10px 0;
             font-size: 1.5rem;
+            text-align: center;
         }
-        #selector-controls {
+
+        #icon-selector {
             display: flex;
-            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .sim-link {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-        }
-        select, button {
-            padding: 8px 12px;
-            border-radius: 6px;
-            border: none;
-            font-size: 1rem;
-            cursor: pointer;
-            box-sizing: border-box;
-        }
-        select {
-            background-color: white;
-            color: #333;
-            border: 1px solid #ccc;
-            min-width: 250px;
-        }
-        button {
-            background-color: #4CAF50;
+            text-align: center;
             color: white;
-            transition: background-color 0.2s;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background-color 0.2s, transform 0.1s;
+            width: 90px; /* Ancho fijo para las tarjetas/botones */
+            min-height: 70px;
         }
-        button:hover {
-            background-color: #45a049;
+
+        .sim-link:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .sim-link i {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: #4CAF50; /* Iconos en color verde */
+        }
+
+        .sim-link span {
+            font-size: 0.75rem;
+            line-height: 1.1;
         }
 
         /* CONTENEDOR PRINCIPAL (IFRAME) */
@@ -85,11 +96,12 @@
             padding: 20px;
         }
 
-        @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+        /* Responsive para móviles */
+        @media (max-width: 768px) {
+            h1 { font-size: 1.3rem; }
+            .sim-link { width: 80px; padding: 6px 10px; }
+            .sim-link i { font-size: 1.5rem; }
+            .sim-link span { font-size: 0.65rem; }
         }
     </style>
 </head>
@@ -97,71 +109,113 @@
 
     <div id="app-container">
         <header>
-            <h1>Dashboard de Simuladores</h1>
-            <div id="selector-controls">
-                <label for="simulador-select" style="font-weight: bold;">Selecciona un simulador:</label>
-                <select id="simulador-select"></select>
-                <button onclick="cargarSimulador()">Cargar</button>
-            </div>
+            <h1>Panel de Simuladores de Energías Alternativas</h1>
+            
+            <div id="icon-selector">
+                </div>
         </header>
 
         <main>
             <div id="placeholder" class="placeholder">
-                Usa el selector para cargar uno de los simuladores.
+                Selecciona una aplicación de la barra superior para cargar el simulador.
             </div>
             <iframe id="simulador-frame" title="Contenido del Simulador"></iframe>
         </main>
     </div>
 
     <script>
-        // 🚨🚨🚨 INSTRUCCIÓN CLAVE: REEMPLAZA LOS LINKS DE EJEMPLO ABAJO 🚨🚨🚨
-        // Define el nombre y la URL ABSOLUTA de cada simulador en GitHub Pages
+        // 🚨 Lista de Simuladores con Rutas Relativas y Iconos 🚨
         const simuladores = [
-            // Reemplaza 'https://tucorreo.github.io/simuladores-energia/' con la URL base de tu proyecto.
-            { name: "01. Mapa Interactivo de Proyectos", path: "https://lorenarodriguez171293.github.io/casaconsumo/index.html" },
-            { name: "02. Calculadora de Consumo (Hogar)", path: "https://lorenarodriguez171293.github.io/casaconsumo/index.html" },
-            { name: "03. Simulador Eólico (Producción)", path: "https://lorenarodriguez171293.github.io/eolica01/index.html" },
-            { name: "04. Simulador Fotovoltaico (Panel)", path: "https://tucorreo.github.io/simuladores-energia/fotovol-main/index.html" },
-            { name: "05. Demostración Hidroeléctrica", path: "https://tucorreo.github.io/simuladores-energia/hidro-main/index.html" },
-            { name: "06. Simulador Nuclear por Fisión", path: "https://tucorreo.github.io/simuladores-energia/NU1-main/index.html" },
-            { name: "07. Simulador de Mezcla de Biocombustibles (B%)", path: "https://tucorreo.github.io/simuladores-energia/biodisel-main/index.html" },
-            { name: "08. Autoevaluación de Energías Alternativas", path: "https://tucorreo.github.io/simuladores-energia/autoeva-main/index.html" },
+            { 
+                name: "Mapa Interactivo", 
+                path: "mapainteractivo01-main/index.html", 
+                icon: "fas fa-map-marked-alt",
+                tooltip: "Mapa de proyectos energéticos en Argentina" 
+            },
+            { 
+                name: "Consumo Hogar", 
+                path: "casaconsumo-main/index.html", 
+                icon: "fas fa-home",
+                tooltip: "Calculadora de consumo eléctrico doméstico" 
+            },
+            { 
+                name: "Eólico", 
+                path: "eolica01-main/index.html", 
+                icon: "fas fa-wind",
+                tooltip: "Simulador de producción eólica" 
+            },
+            { 
+                name: "Fotovoltaico", 
+                path: "fotovol-main/index.html", 
+                icon: "fas fa-solar-panel",
+                tooltip: "Simulador de panel solar fotovoltaico" 
+            },
+            { 
+                name: "Hidroeléctrico", 
+                path: "hidro-main/index.html", 
+                icon: "fas fa-water",
+                tooltip: "Demostración de energía hidráulica" 
+            },
+            { 
+                name: "Nuclear", 
+                path: "NU1-main/index.html", 
+                icon: "fas fa-atom",
+                tooltip: "Simulador de energía nuclear por fisión" 
+            },
+            { 
+                name: "Biocombustibles", 
+                path: "biodisel-main/index.html", 
+                icon: "fas fa-leaf",
+                tooltip: "Simulador de mezcla de biodiesel (B%)" 
+            },
+            { 
+                name: "Autoevaluación", 
+                path: "autoeva-main/index.html", 
+                icon: "fas fa-clipboard-list",
+                tooltip: "Cuestionario de autoevaluación" 
+            },
         ];
-        
-        // --- El resto del script permanece igual y maneja la carga en el iframe ---
 
-        const select = document.getElementById('simulador-select');
         const frame = document.getElementById('simulador-frame');
         const placeholder = document.getElementById('placeholder');
+        const selectorContainer = document.getElementById('icon-selector');
 
-        function llenarSelector() {
-            let defaultOption = document.createElement('option');
-            defaultOption.value = "";
-            defaultOption.textContent = "-- Selecciona uno para cargar --";
-            defaultOption.disabled = true;
-            defaultOption.selected = true;
-            select.appendChild(defaultOption);
+        // Función para cargar el simulador en el iframe
+        function cargarSimulador(path) {
+            frame.src = path;
+            frame.style.display = 'block';
+            placeholder.style.display = 'none';
+        }
 
+        // Función para generar los iconos en el DOM
+        function generarSelector() {
             simuladores.forEach(sim => {
-                let option = document.createElement('option');
-                option.value = sim.path;
-                option.textContent = sim.name;
-                select.appendChild(option);
+                const link = document.createElement('a');
+                
+                // Configura el elemento <a>
+                link.href = "#"; // Se usa JS para la navegación, no la navegación por defecto
+                link.classList.add('sim-link');
+                link.title = sim.tooltip; // Muestra el tooltip al pasar el mouse
+                
+                // Contenido del ícono y texto
+                link.innerHTML = `<i class="${sim.icon}"></i><span>${sim.name}</span>`;
+
+                // Agrega el evento de click
+                link.addEventListener('click', (e) => {
+                    e.preventDefault(); // Evita que la página se recargue
+                    cargarSimulador(sim.path);
+
+                    // Opcional: Resaltar el botón activo (simple CSS)
+                    document.querySelectorAll('.sim-link').forEach(btn => btn.style.backgroundColor = 'transparent');
+                    link.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                });
+
+                selectorContainer.appendChild(link);
             });
         }
 
-        function cargarSimulador() {
-            const selectedPath = select.value;
-            if (selectedPath) {
-                frame.src = selectedPath;
-                frame.style.display = 'block';
-                placeholder.style.display = 'none';
-            } else {
-                alert("Por favor, selecciona un simulador de la lista.");
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', llenarSelector);
+        // Inicializar el selector al cargar la página
+        document.addEventListener('DOMContentLoaded', generarSelector);
     </script>
 </body>
 </html>
