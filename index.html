@@ -3,168 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Simuladores de Energía (Iconos)</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Introducción - Matriz Energética Argentina</title>
     
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
-        /* ESTILOS BASE */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            background-color: #f4f7f9;
-            height: 100vh;
+            padding: 25px;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
         }
-        #app-container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+        .intro-container {
+            max-width: 900px;
+            margin: 0 auto;
         }
-
-        /* HEADER Y SELECTOR DE ICONOS */
-        header {
-            background-color: #2c3e50; /* Azul oscuro */
-            color: white;
-            padding: 10px 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            z-index: 10;
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            margin-top: 30px;
         }
-
-        h1 {
-            margin: 0 0 10px 0;
-            font-size: 1.5rem;
-            text-align: center;
+        h3 {
+            color: #3498db;
+            margin-top: 20px;
         }
-
-        #icon-selector {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
+        .energia-card {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 5px solid #4CAF50;
+            border-radius: 5px;
         }
-
-        .sim-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            color: white;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            transition: background-color 0.2s, transform 0.1s;
-            width: 90px;
-            min-height: 70px;
-        }
-
-        .sim-link:hover, .sim-link.active {
-            background-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .sim-link i {
-            font-size: 1.8rem;
+        .energia-card p {
             margin-bottom: 5px;
-            color: #4CAF50; /* Iconos en color verde */
         }
-
-        .sim-link span {
-            font-size: 0.75rem;
-            line-height: 1.1;
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
-
-        /* CONTENEDOR PRINCIPAL (IFRAME) */
-        main {
-            flex-grow: 1;
-            padding: 0;
-            overflow: hidden;
+        .chart-box {
+            max-width: 450px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        #simulador-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Estilo para el botón de inicio */
-        .home-link i { color: #f39c12 !important; }
-        .home-link:hover { background-color: rgba(243, 156, 18, 0.2) !important; }
     </style>
 </head>
 <body>
 
-    <div id="app-container">
-        <header>
-            <h1>Panel de Simuladores de Energías Alternativas</h1>
-            
-            <div id="icon-selector">
-                <a href="#" class="sim-link home-link active" onclick="cargarSimulador('intro.html', event, true)" title="Información y Matriz Energética">
-                    <i class="fas fa-chart-pie"></i>
-                    <span>Inicio/Info</span>
-                </a>
-                </div>
-        </header>
+<div class="intro-container">
 
-        <main>
-            <iframe id="simulador-frame" title="Contenido del Dashboard" src="intro.html"></iframe>
-        </main>
+    <h2>👋 Bienvenido al Dashboard de Simuladores de Energía</h2>
+
+    <p>Este espacio fue diseñado para comprender y experimentar con las principales fuentes de energía, con un enfoque particular en las **energías alternativas (o renovables)** y su rol en la matriz energética de Argentina.</p>
+
+    <h2 id="matriz">Matriz Energética Argentina 🇦🇷</h2>
+    <p>La matriz energética primaria de Argentina está dominada por los **combustibles fósiles**, aunque la participación de las fuentes renovables ha crecido significativamente. Este gráfico interactivo muestra la distribución aproximada (datos a modo ilustrativo de los principales componentes):</p>
+    
+    <div class="chart-box">
+        <canvas id="matrizChart"></canvas>
+        <small style="display: block; color: #777; text-align: center; margin-top: 10px;">
+            Composición aproximada de la matriz energética primaria (Fuente: Ilustrativo).
+        </small>
     </div>
 
-    <script>
-        // 🚨🚨🚨 INSTRUCCIÓN CLAVE: REEMPLAZA LOS LINKS DE EJEMPLO ABAJO 🚨🚨🚨
-        // Asume que la URL de tu repositorio es: https://[USUARIO].github.io/[REPOSITORIO]/
-        const BASE_URL = "https://[USUARIO].github.io/[REPOSITORIO]/"; // <--- REEMPLAZA ESTO
+    <p>El desafío central de Argentina es aumentar la cuota de las energías renovables para asegurar la sostenibilidad y reducir las emisiones de carbono, mientras se mantiene la seguridad energética.</p>
+
+    <h2 id="energias">Conceptos Clave de cada Energía</h2>
+
+    <div class="grid">
+        <div class="energia-card">
+            <h3>💨 Eólica</h3>
+            <p>Se obtiene al transformar la energía cinética del viento en electricidad mediante **aerogeneradores**. Argentina tiene regiones con recursos eólicos de clase mundial (Patagonia).</p>
+            <p>🟢 **Ventaja:** Cero emisiones una vez instalada.</p>
+            <p>🔴 **Desafío:** Es intermitente; la producción depende de la velocidad del viento.</p>
+        </div>
+
+        <div class="energia-card">
+            <h3>☀️ Fotovoltaica</h3>
+            <p>Convierte la radiación solar en electricidad utilizando el **efecto fotovoltaico** en paneles. Es ideal para zonas con alta insolación.</p>
+            <p>🟢 **Ventaja:** Instalación modular y bajos costos de mantenimiento.</p>
+            <p>🔴 **Desafío:** Solo produce de día; requiere almacenamiento o soporte de otras fuentes.</p>
+        </div>
+
+        <div class="energia-card">
+            <h3>💧 Hidroeléctrica</h3>
+            <p>Utiliza la fuerza del agua que cae desde una altura (embalse) para hacer girar una turbina. Es una energía renovable de **generación gestionable** (puede activarse o desactivarse).</p>
+            <p>🟢 **Ventaja:** Alta capacidad y estabilidad de la red (base de carga).</p>
+            <p>🔴 **Desafío:** Gran impacto ambiental y social por la construcción de represas.</p>
+        </div>
+
+        <div class="energia-card">
+            <h3>⚛️ Nuclear</h3>
+            <p>Se genera mediante la **fisión** de átomos pesados (Uranio) para producir vapor que mueve una turbina. No es renovable, pero se considera una fuente de baja emisión de carbono.</p>
+            <p>🟢 **Ventaja:** Generación continua (24/7) y densa (mucha energía en poco combustible).</p>
+            <p>🔴 **Desafío:** Gestión de residuos radiactivos de larga vida y altos costos iniciales.</p>
+        </div>
+
+        <div class="energia-card">
+            <h3>🌾 Biocombustibles</h3>
+            <p>Combustibles líquidos o gaseosos derivados de biomasa (ej. cultivos). El **Biodiésel (B%)** se mezcla con diésel fósil para transporte.</p>
+            <p>🟢 **Ventaja:** Contribuye al ciclo de carbono neutro y promueve la agroindustria.</p>
+            <p>🔴 **Desafío:** Puede competir con la producción de alimentos y requiere grandes extensiones de tierra.</p>
+        </div>
         
-        const simuladores = [
-            // Reemplazar la 'path' con la URL completa si tiene diferentes repositorios.
-            // Si todo está en el mismo repositorio, las rutas relativas también funcionan.
-            { name: "Mapa Interactivo", key: "mapa", path: BASE_URL + "https://lorenarodriguez171293.github.io/mapainteractivo01/", icon: "fas fa-map-marked-alt", tooltip: "Mapa de proyectos energéticos en Argentina" },
-            { name: "Consumo Hogar", key: "consumo", path: BASE_URL + "https://lorenarodriguez171293.github.io/casaconsumo/", icon: "fas fa-home", tooltip: "Calculadora de consumo eléctrico doméstico" },
-            { name: "Eólico", key: "eolico", path: BASE_URL + "https://lorenarodriguez171293.github.io/eolica01/", icon: "fas fa-wind", tooltip: "Simulador de producción eólica" },
-            { name: "Fotovoltaico", key: "fotovol", path: BASE_URL + "https://lorenarodriguez171293.github.io/fotovol/", icon: "fas fa-solar-panel", tooltip: "Simulador de panel solar fotovoltaico" },
-            { name: "Hidroeléctrico", key: "hidro", path: BASE_URL + "https://lorenarodriguez171293.github.io/biodisel/", icon: "fas fa-water", tooltip: "Demostración de energía hidráulica" },
-            { name: "Nuclear", key: "nuclear", path: BASE_URL + "https://lorenarodriguez171293.github.io/NU1/", icon: "fas fa-atom", tooltip: "Simulador de energía nuclear por fisión" },
-            { name: "Biocombustibles", key: "bio", path: BASE_URL + "https://lorenarodriguez171293.github.io/biodisel/", icon: "fas fa-leaf", tooltip: "Simulador de mezcla de biodiesel (B%)" },
-            { name: "Autoevaluación", key: "eval", path: BASE_URL + "https://lorenarodriguez171293.github.io/autoeva/", icon: "fas fa-clipboard-list", tooltip: "Cuestionario de autoevaluación" },
-        ];
+        <div class="energia-card">
+            <h3>💡 Aplicaciones</h3>
+            <p>El dashboard incluye simuladores para:</p>
+            <ul>
+                <li>**Consumo Hogar:** Calculadora de demanda energética.</li>
+                <li>**Mapa Interactivo:** Visualización de proyectos reales.</li>
+                <li>**Autoevaluación:** Cuestionario para medir conocimientos.</li>
+            </ul>
+        </div>
+    </div>
 
-        const frame = document.getElementById('simulador-frame');
-        const selectorContainer = document.getElementById('icon-selector');
+</div>
 
-        // Función para cargar el simulador en el iframe
-        window.cargarSimulador = function(path, event, isHome = false) {
-            if (event) event.preventDefault(); // Evita que la página se recargue
+<script>
+    // 📊 DATOS Y FUNCIÓN DEL GRÁFICO DE TORTA
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('matrizChart').getContext('2d');
+        
+        // Datos de la matriz energética primaria (Ejemplo ilustrativo de la composición principal)
+        const data = {
+            labels: [
+                'Gas Natural', 
+                'Petróleo', 
+                'Hidroeléctrica', 
+                'Nuclear', 
+                'Renovables (Eólica, Solar, Biomasa)'
+            ],
+            datasets: [{
+                label: 'Participación en la Matriz (%)',
+                data: [50, 30, 8, 4, 8], // Los valores deben sumar 100
+                backgroundColor: [
+                    '#3498db', // Azul
+                    '#e67e22', // Naranja
+                    '#2ecc71', // Verde
+                    '#f1c40f', // Amarillo
+                    '#1abc9c'  // Turquesa para renovables
+                ],
+                hoverOffset: 15
+            }]
+        };
 
-            frame.src = path;
-            
-            // Lógica para resaltar el botón activo
-            document.querySelectorAll('.sim-link').forEach(btn => btn.classList.remove('active'));
-            if (event) {
-                event.currentTarget.classList.add('active');
-            } else if (isHome) {
-                document.querySelector('.home-link').classList.add('active');
+        const config = {
+            type: 'doughnut', // Tipo de gráfico: dona (donut) o pie (torta)
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Composición de la Matriz Energética Primaria'
+                    }
+                }
             }
-        }
+        };
 
-        // Función para generar los iconos en el DOM
-        function generarSelector() {
-            simuladores.forEach(sim => {
-                const link = document.createElement('a');
-                
-                link.href = "#";
-                link.classList.add('sim-link');
-                link.title = sim.tooltip;
-                
-                link.innerHTML = `<i class="${sim.icon}"></i><span>${sim.name}</span>`;
+        new Chart(ctx, config);
+    });
+</script>
 
-                link.addEventListener('click', (e) => {
-                    cargarSimulador(sim.path, e);
-                });
-
-                selectorContainer.appendChild(link);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', generarSelector);
-    </script>
 </body>
 </html>
